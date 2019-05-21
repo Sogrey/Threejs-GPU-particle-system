@@ -1,0 +1,28 @@
+{
+  "name": "threejs-gpu-particle-system",
+  "version": "1.0.0",
+  "description": "<https://github.com/fazeaction/three-gpu-particle-system>",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "parcel serve index.html --open",
+    "dev": "live-server",
+    "build": "parcel build src/js/build.js --out-dir build --out-file threejs-gpu-particle-system.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sogrey/Threejs-GPU-particle-system.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sogrey/Threejs-GPU-particle-system/issues"
+  },
+  "homepage": "https://github.com/Sogrey/Threejs-GPU-particle-system#readme",
+  "devDependencies": {
+    "three": "^0.99.0",
+    "live-server": "^1.2.1"
+  },
+  "dependencies": {}
+}

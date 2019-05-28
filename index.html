@@ -17,7 +17,7 @@
         <p>Press 'P' to make a poof. - Hold 'T' to make a trail.</p>
     </div>
 
-    <script src="node_modules/three/build/three.min.js"></script>
+    <script src="node_modules/three/build/three.js"></script>
     <script src="node_modules/three/examples/js/controls/OrbitControls.js"></script>
     <script src="node_modules/three/examples/js/WebGL.js"></script>
     <script src="node_modules/three/examples/js/libs/stats.min.js"></script>
@@ -29,10 +29,7 @@
         var camera, scene, renderer;
 
         var particleSystem;
-        var g_poofs = [],
-            g_poofIndex = 0,
-            MAX_POOFS = 0;
-        var g_trail, g_trailParameters;
+
         var g_keyDown = [];
 
         init();
@@ -129,19 +126,19 @@
             scene.add(light2);
 
             particleSystem = new THREE.ParticleSystem(scene, camera);
-            setupFlame(particleSystem);
-            setupNaturalGasFlame(particleSystem);
-            setupSmoke(particleSystem);
-            setupWhiteEnergy(particleSystem);
-            setupRipples(particleSystem);
-            setupText(particleSystem);
-            setupRain(particleSystem);
-            setupSnow(particleSystem);
+            // setupFlame(particleSystem);
+            // setupNaturalGasFlame(particleSystem);
+            // setupSmoke(particleSystem);
+            // setupWhiteEnergy(particleSystem);
+            // setupRipples(particleSystem);
+            // setupText(particleSystem);
+            // setupRain(particleSystem);
+            // setupSnow(particleSystem);
             setupAnim(particleSystem);
-            setupBall(particleSystem);
-            setupCube(particleSystem);
-            setupPoof(particleSystem);
-            setupTrail(particleSystem);
+            // setupBall(particleSystem);
+            // setupCube(particleSystem);
+            // setupPoof(particleSystem);
+            // setupTrail(particleSystem);
 
 
             renderer = new THREE.WebGLRenderer({

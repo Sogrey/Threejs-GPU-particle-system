@@ -1,3 +1,8 @@
+var g_poofs = [],
+    g_poofIndex = 0,
+    MAX_POOFS = 1;
+var g_trail, g_trailParameters;
+//火焰
 function setupFlame(particleSystem) {
 
     var emitter = particleSystem.createParticleEmitter();
@@ -20,12 +25,11 @@ function setupFlame(particleSystem) {
         endSize: 0.9,
         velocity: [0, 0.60, 0],
         velocityRange: [0.15, 0.15, 0.15],
-        worldAcceleration: [0, -0.20, 0],
+        worldAcceleration: [0, -0.2, 0],
         spinSpeedRange: 4
     });
-
+    emitter.name = "Flame";
     scene.add(emitter);
-
 }
 
 function setupNaturalGasFlame(particleSystem) {
@@ -51,11 +55,11 @@ function setupNaturalGasFlame(particleSystem) {
         worldAcceleration: [0, -0.20, 0],
         spinSpeedRange: 4
     });
-
+    emitter.name = "NaturalGasFlame";
     scene.add(emitter);
 
 }
-
+//烟
 function setupSmoke(particleSystem) {
 
     var emitter = particleSystem.createParticleEmitter();
@@ -64,7 +68,7 @@ function setupSmoke(particleSystem) {
     emitter.setColorRamp(
         [
             0, 0, 0, 1,
-            1, 0, 0, 0,
+            0, 0, 0, 0,
         ]
     );
     emitter.setParameters({
@@ -72,13 +76,13 @@ function setupSmoke(particleSystem) {
         lifeTime: 2,
         timeRange: 2,
         startSize: 1,
-        endSize: 1.5,
+        endSize: 3,
         velocity: [0, 2, 0],
         velocityRange: [0.2, 0, 0.2],
-        worldAcceleration: [0, -0.25, 0],
+        worldAcceleration: [0, -0.1, 0],
         spinSpeedRange: 2
     });
-
+    emitter.name = "Smoke";
     scene.add(emitter);
 
 }
@@ -104,7 +108,7 @@ function setupWhiteEnergy(particleSystem) {
         positionRange: [1, 0, 1],
         velocityRange: [0.20, 0, 0.20]
     });
-
+    emitter.name = "WhiteEnergy";
     scene.add(emitter);
 
 }
@@ -132,7 +136,7 @@ function setupRipples(particleSystem) {
         positionRange: [1, 0, 1],
         billboard: false
     });
-
+    emitter.name = "Ripples";
     scene.add(emitter);
 
 }
@@ -195,11 +199,11 @@ function setupText(particleSystem) {
             parameters.position[1] = positions[index][1];
 
         });
-
+    emitter.name = "Text";
     scene.add(emitter);
 
 }
-
+//雨
 function setupRain(particleSystem) {
 
     // var emitter = particleSystem.createParticleEmitter();
@@ -225,11 +229,11 @@ function setupRain(particleSystem) {
         positionRange: [10, 10, 10],
         velocity: [0, -5, 0]
     });
-
+    emitter.name = "Rain";
     scene.add(emitter);
 
 }
-
+//雪
 function setupSnow(particleSystem) {
 
     // var emitter = particleSystem.createParticleEmitter();
@@ -260,7 +264,7 @@ function setupSnow(particleSystem) {
         positionRange: [5, 5, 5],
         velocity: [0, -0.8, 0]
     });
-
+    emitter.name = "Snow";
     scene.add(emitter);
 
 }
@@ -292,7 +296,7 @@ function setupAnim(particleSystem) {
         acceleration: [0, -1.5, 0],
         spinSpeedRange: 1
     });
-
+    emitter.name = "Anim";
     scene.add(emitter);
 
 }
@@ -339,7 +343,7 @@ function setupBall(particleSystem) {
             parameters.orientation = [q.x, q.y, q.z, q.w];
 
         });
-
+    emitter.name = "Ball";
     scene.add(emitter);
 
 }
@@ -389,7 +393,7 @@ function setupCube(particleSystem) {
             parameters.position = [position.x * len, position.y * len, position.z * len];
 
         });
-
+    emitter.name = "Cube";
     scene.add(emitter);
 
 }

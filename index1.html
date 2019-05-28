@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- https://stackoverflow.com/questions/43432263/simulate-air-flowing-through-a-pipe-in-three-js -->
+<head>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+
+        const renderer = new THREE.WebGLRenderer();
+        document.body.appendChild(renderer.domElement);
+
+        // make a texture with an arrow
+        const ctx = document.createElement("canvas").getContext("2d");
+        ctx.canvas.width = 64;
+        ctx.canvas.height = 64;
+
+        ctx.fillStyle = "rgba(0,0,255,0.5)";
+        ctx.fillRect(0, 0, 64, 64);
+
+        ctx.translate(32, 32);
+        ctx.rotate(Math.PI * .5);
+        ctx.fillStyle = "rgb(0,255,255)";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.font = "48px sans-serif";
+        ctx.fillText("➡︎", 0, 0);
+
+        const texture = new THREE.CanvasTexture(ctx.canvas);
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.x = 4;
+        texture.repeat.y = 9;
+
+        const radiusTop = 1;
+        const radiusBottom = 1;
+        const height = 5;
+        const radiusSegments = 20;
+        const heightSegments = 2;
+        const openEnded = true;
+        const geometry = new THREE.CylinderBufferGeometry(
+            radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded);
+        const material = new THREE.MeshBasicMaterial({
+            map: texture,
+            side: THREE.DoubleSide,
+            depthWrite: false,
+            depthTest: false,
+            transparent: true,
+        });
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+        mesh.rotation.z = Math.PI * .5;
+
+        function render(time) {
+            time *= 0.001;
+
+            resize();
+
+            const cameraSpeed = time * 0.3;
+            const cameraRadius = 5;
+            camera.position.x = Math.cos(cameraSpeed) * cameraRadius;
+            camera.position.y = 1;
+            camera.position.z = Math.sin(cameraSpeed) * cameraRadius;
+            camera.lookAt(mesh.position);
+
+            texture.offset.y = (time * 3 % 1);
+
+            renderer.render(scene, camera);
+            requestAnimationFrame(render);
+        }
+        requestAnimationFrame(render);
+
+        function resize() {
+            const canvas = renderer.domElement;
+            const width = canvas.clientWidth;
+            const height = canvas.clientHeight;
+            if (canvas.width !== width || canvas.height !== height) {
+                renderer.setSize(width, height, false);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+            }
+        }
+    </script>
+</body>
